@@ -71,6 +71,30 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
+//  for each
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+movements.forEach(function (move, i) {
+  move > 0 ? console.log(`${i + 1} add money ${move}`) : console.log(`${i + 1} withdraw money ${move}`);
+})
+
+
 /////////////////////////////////////////////////
+
+//   slice
+const arr = ['a', 'b', 'c', 'd', 'e'];
+
+const a = arr.slice(0, 1);
+console.log(a);
+
+const b = [...arr];
+console.log(b);
+
+//  splice
+const last = arr.splice(arr.length - 1, 1);
+console.log(last);
+
+//  reverse
+
+const reverse = arr.reverse();
+console.log(reverse);
