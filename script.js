@@ -64,10 +64,10 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+
   movements.forEach(function (movement, i) {
-
     const type = movement > 0 ? 'deposit' : 'withdrawal';
-
     const html = `
            <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
@@ -75,7 +75,6 @@ const displayMovements = function (movements) {
         </div>
         `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
-
   });
 }
 
@@ -97,13 +96,13 @@ const currencies = new Map([
 //  for each
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-movements.forEach(function (move, i) {
-  move > 0 ? console.log(`${i + 1} add money ${move}`) : console.log(`${i + 1} withdraw money ${move}`);
-})
+// movements.forEach(function (move, i) {
+//   move > 0 ? console.log(`${i + 1} add money ${move}`) : console.log(`${i + 1} withdraw money ${move}`);
+// })
 
-currencies.forEach(function (value, key) {
-  return console.log(`${key} value is ${value}`);
-})
+// currencies.forEach(function (value, key) {
+//   return console.log(`${key} value is ${value}`);
+// })
 
 /////////////////////////////////////////////////
 
@@ -121,3 +120,27 @@ const last = arr.splice(arr.length - 1, 1);
 //  reverse
 const reverse = arr.reverse();
 // console.log(reverse);
+
+
+
+// const juliaPets = [12, 32, 3, 25, 6, 7, 1, 2];
+// const emyPets = [10, 33, 1, 2, 34];
+
+// const juliaDogs = juliaPets.splice(0, juliaPets.length - 2);
+// const emyDogs = emyPets.splice(0, emyPets.length - 2);
+
+// console.log(juliaDogs);
+// console.log(emyDogs);
+
+// const pets = [...juliaDogs, ...emyDogs];
+// console.log(pets);
+
+// pets.forEach(function (pet, i) {
+//   let dog = '';
+//   pet > 5 ? dog = 'dog' : dog = 'puppy';
+//   console.log(`${i + 1}  ${dog} ${pet} years old`);
+// })
+
+
+
+movements.map((value, i) => value > 0 ? console.log(`${i + 1} ${value += value * 0.1} is now in $`) : false)
