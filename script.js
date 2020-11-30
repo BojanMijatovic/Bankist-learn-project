@@ -61,6 +61,29 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+
+
+const displayMovements = function (movements) {
+  movements.forEach(function (movement, i) {
+
+    const type = movement > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+           <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+          <div class="movements__value">${movement}</div>
+        </div>
+        `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+
+  });
+}
+
+
+displayMovements(account1.movements)
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -78,23 +101,23 @@ movements.forEach(function (move, i) {
   move > 0 ? console.log(`${i + 1} add money ${move}`) : console.log(`${i + 1} withdraw money ${move}`);
 })
 
+currencies.forEach(function (value, key) {
+  return console.log(`${key} value is ${value}`);
+})
 
 /////////////////////////////////////////////////
 
 //   slice
 const arr = ['a', 'b', 'c', 'd', 'e'];
-
 const a = arr.slice(0, 1);
-console.log(a);
-
+// console.log(a);
 const b = [...arr];
-console.log(b);
+// console.log(b);
 
 //  splice
 const last = arr.splice(arr.length - 1, 1);
-console.log(last);
+// console.log(last);
 
 //  reverse
-
 const reverse = arr.reverse();
-console.log(reverse);
+// console.log(reverse);
