@@ -155,12 +155,17 @@ const reverse = arr.reverse();
 
 
 const deposits = movements.filter(deposit => deposit > 0);
-const withdraws = movements.filter(withdraw => withdraw < 0)
+const withdraws = movements.filter(withdraw => withdraw < 0);
 
 
 console.log(deposits);
 console.log(withdraws);
 
-const globalBalance = movements.reduce((prevVal, currVal) => prevVal + currVal);
 
-console.log(globalBalance);
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((prevVal, currVal) => prevVal + currVal);
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayBalance(account1.movements);
