@@ -81,7 +81,22 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements)
 
+//  create user name
 
+//stw
+
+//  first loweCase / then split method then mapping and create new arr with firstLetters and join in the end
+const createUserNames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.userName = acc.owner.toLowerCase().split(' ').map(name => name[0]).join('')
+  })
+}
+
+
+
+
+createUserNames(accounts);
+console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -143,4 +158,4 @@ const reverse = arr.reverse();
 
 
 
-movements.map((value, i) => value > 0 ? console.log(`${i + 1} ${value += value * 0.1} is now in $`) : false)
+// movements.map((value, i) => value > 0 ? console.log(`${i + 1} ${value += value * 0.1} is now in $`) : false)
