@@ -169,3 +169,27 @@ const calcDisplayBalance = function (movements) {
 }
 
 calcDisplayBalance(account1.movements);
+
+
+// const data1 = [2, 35, 5, 6, 8];
+// const data2 = [4, 5, 7, 9, 12, 3];
+
+// const data = [...data1, ...data2];
+
+// const age = data.map(calc => {
+//   if (calc < 6) {
+//     return calc * 2;
+//   } else {
+//     return 16 + calc * 3;
+//   }
+// });
+
+// console.log(age);
+
+// const test = age.filter(humanAge => humanAge > 30);
+
+// console.log(test);
+
+// const average = test.reduce((acc, current) => acc + current / test.length);
+
+// console.log(average);
