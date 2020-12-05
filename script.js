@@ -79,7 +79,7 @@ const displayMovements = function (movements) {
 }
 
 
-displayMovements(account1.movements)
+
 
 //  create user name
 const createUserNames = function (accs) {
@@ -89,7 +89,7 @@ const createUserNames = function (accs) {
 }
 
 createUserNames(accounts);
-console.log(accounts);
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -159,21 +159,22 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} EUR`;
 }
 
-calcDisplayBalance(account1.movements);
+
 
 
 const calcDisplaySummary = function (movements) {
+  //  incomes
   const incomes = movements.filter(income => income > 0).reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}EUR`;
-
+  // outcomes
   const out = movements.filter(income => income < 0).reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}EUR`;
-
+  // interest of bank
   const interest = movements.filter(income => income > 0).map(deposit => deposit * 1.2 / 100).reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}EUR`;
 }
 
-calcDisplaySummary(account1.movements)
+
 
 
 // const data1 = [2, 35, 5, 6, 8];
@@ -198,3 +199,44 @@ calcDisplaySummary(account1.movements)
 // const average = test.reduce((acc, current) => acc + current / test.length);
 
 // console.log(average);
+
+// const findAcc = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(findAcc);
+
+// for (const acc of accounts) {
+//   acc.owner === 'Jessica Davis' ? console.log(acc) : 'user not found'
+// }
+
+
+
+//  Login event listeners
+let currentAcc;
+btnLogin.addEventListener('click', function (e) {
+  //  prevent Default behavior
+  e.preventDefault();
+
+  currentAcc = accounts.find(acc => acc.userName === inputLoginUsername.value);
+  console.log(currentAcc);
+  if (currentAcc?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome ${currentAcc.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+
+    // clear input fields
+    inputLoginUsername.value = inputLoginPin.value = ' ';
+    inputLoginPin.blur();
+
+    //  display movements
+    displayMovements(currentAcc.movements);
+    //  calc balance
+    calcDisplayBalance(currentAcc.movements);
+    //  display summary
+    calcDisplaySummary(currentAcc.movements);
+  }
+})
+
+//  -------- Transfer
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+})
