@@ -63,6 +63,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 
 
+//  display new movements
 const displayMovements = function (movements) {
   containerMovements.innerHTML = '';
 
@@ -78,9 +79,6 @@ const displayMovements = function (movements) {
   });
 }
 
-
-
-
 //  create user name
 const createUserNames = function (accs) {
   accs.forEach(function (acc) {
@@ -91,7 +89,6 @@ const createUserNames = function (accs) {
 createUserNames(accounts);
 
 //  update UI
-
 const updateUI = function (acc) {
   //  display movements
   displayMovements(acc.movements);
@@ -164,13 +161,16 @@ const reverse = arr.reverse();
 const deposits = movements.filter(deposit => deposit > 0);
 const withdraws = movements.filter(withdraw => withdraw < 0);
 
+
 //  ---------------display balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((prevVal, currVal) => prevVal + currVal);
   labelBalance.textContent = `${acc.balance} EUR`;
 }
 
+
 //  ---------------display summary
+
 const calcDisplaySummary = function (movements) {
   //  incomes
   const incomes = movements.filter(income => income > 0).reduce((acc, mov) => acc + mov, 0);
@@ -214,6 +214,7 @@ const calcDisplaySummary = function (movements) {
 //   acc.owner === 'Jessica Davis' ? console.log(acc) : 'user not found'
 // }
 
+
 // ----------------- show account
 let currentAcc;
 btnLogin.addEventListener('click', function (e) {
@@ -234,7 +235,9 @@ btnLogin.addEventListener('click', function (e) {
   }
 })
 
+
 //  --------transfer amount
+
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -264,4 +267,23 @@ btnClose.addEventListener('click', function (e) {
     containerApp.style.opacity = 0;
   }
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+
+//  ------- flat method
+// const arrFlat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+// console.log(arrFlat);
+// const test = arrFlat.flat()
+// console.log(test);
+
+const sort = [3, 312, 31231, 1, 32, 211, 321, 12, -12, 0, 334, 43];
+
+const sortNums = sort.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  } else if (a < b) {
+    return -1;
+  }
 })
+
+console.log(sortNums);
