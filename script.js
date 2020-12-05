@@ -129,8 +129,6 @@ const last = arr.splice(arr.length - 1, 1);
 const reverse = arr.reverse();
 // console.log(reverse);
 
-
-
 // const juliaPets = [12, 32, 3, 25, 6, 7, 1, 2];
 // const emyPets = [10, 33, 1, 2, 34];
 
@@ -149,18 +147,11 @@ const reverse = arr.reverse();
 //   console.log(`${i + 1}  ${dog} ${pet} years old`);
 // })
 
-
-
 // movements.map((value, i) => value > 0 ? console.log(`${i + 1} ${value += value * 0.1} is now in $`) : false)
 
 
 const deposits = movements.filter(deposit => deposit > 0);
 const withdraws = movements.filter(withdraw => withdraw < 0);
-
-
-console.log(deposits);
-console.log(withdraws);
-
 
 
 const calcDisplayBalance = function (movements) {
@@ -169,6 +160,20 @@ const calcDisplayBalance = function (movements) {
 }
 
 calcDisplayBalance(account1.movements);
+
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements.filter(income => income > 0).reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}EUR`;
+
+  const out = movements.filter(income => income < 0).reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}EUR`;
+
+  const interest = movements.filter(income => income > 0).map(deposit => deposit * 1.2 / 100).reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}EUR`;
+}
+
+calcDisplaySummary(account1.movements)
 
 
 // const data1 = [2, 35, 5, 6, 8];
