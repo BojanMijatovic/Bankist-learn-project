@@ -164,15 +164,13 @@ const reverse = arr.reverse();
 const deposits = movements.filter(deposit => deposit > 0);
 const withdraws = movements.filter(withdraw => withdraw < 0);
 
-
+//  ---------------display balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((prevVal, currVal) => prevVal + currVal);
   labelBalance.textContent = `${acc.balance} EUR`;
 }
 
-
-
-
+//  ---------------display summary
 const calcDisplaySummary = function (movements) {
   //  incomes
   const incomes = movements.filter(income => income > 0).reduce((acc, mov) => acc + mov, 0);
@@ -184,8 +182,6 @@ const calcDisplaySummary = function (movements) {
   const interest = movements.filter(income => income > 0).map(deposit => deposit * 1.2 / 100).reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}EUR`;
 }
-
-
 
 
 // const data1 = [2, 35, 5, 6, 8];
@@ -218,7 +214,7 @@ const calcDisplaySummary = function (movements) {
 //   acc.owner === 'Jessica Davis' ? console.log(acc) : 'user not found'
 // }
 
-//  Login event listeners
+// ----------------- show account
 let currentAcc;
 btnLogin.addEventListener('click', function (e) {
   //  prevent Default behavior
@@ -238,7 +234,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 })
 
-//  -------- Transfer
+//  --------transfer amount
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -253,4 +249,19 @@ btnTransfer.addEventListener('click', function (e) {
     // update ui
     updateUI(currentAcc);
   }
+})
+
+
+//  -----------  remove account
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (inputCloseUsername.value === currentAcc.userName && Number(inputClosePin.value) === currentAcc.pin) {
+    const index = accounts.findIndex(acc => acc.userName === currentAcc.userName && acc.pin === currentAcc.pin);
+    //  remove account splice
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
 })
