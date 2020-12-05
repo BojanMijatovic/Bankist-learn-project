@@ -90,6 +90,17 @@ const createUserNames = function (accs) {
 
 createUserNames(accounts);
 
+//  update UI
+
+const updateUI = function (acc) {
+  //  display movements
+  displayMovements(acc.movements);
+  //  calc balance
+  calcDisplayBalance(acc);
+  //  display summary
+  calcDisplaySummary(acc.movements);
+}
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -154,9 +165,9 @@ const deposits = movements.filter(deposit => deposit > 0);
 const withdraws = movements.filter(withdraw => withdraw < 0);
 
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((prevVal, currVal) => prevVal + currVal);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((prevVal, currVal) => prevVal + currVal);
+  labelBalance.textContent = `${acc.balance} EUR`;
 }
 
 
@@ -207,8 +218,6 @@ const calcDisplaySummary = function (movements) {
 //   acc.owner === 'Jessica Davis' ? console.log(acc) : 'user not found'
 // }
 
-
-
 //  Login event listeners
 let currentAcc;
 btnLogin.addEventListener('click', function (e) {
@@ -225,18 +234,23 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = ' ';
     inputLoginPin.blur();
 
-    //  display movements
-    displayMovements(currentAcc.movements);
-    //  calc balance
-    calcDisplayBalance(currentAcc.movements);
-    //  display summary
-    calcDisplaySummary(currentAcc.movements);
+    updateUI(currentAcc);
   }
 })
 
 //  -------- Transfer
-
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAccount = accounts.find(acc => acc.userName === inputTransferTo.value);
 
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (amount > 0 && receiverAccount && currentAcc.balance >= amount && receiverAccount?.userName !== currentAcc.userName) {
+    currentAcc.movements.push(-amount);
+    receiverAccount.movements.push(amount);
+
+    // update ui
+    updateUI(currentAcc);
+  }
 })
